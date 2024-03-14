@@ -5,7 +5,7 @@ import com.example.productprices.dto.ProductPricesResponseDTO;
 import com.example.productprices.exception.NotFoundException;
 import com.example.productprices.mapper.PriceToProductPriceResponseDTOMapper;
 import com.example.productprices.model.Price;
-import com.example.productprices.service.ProductPricesService;
+import com.example.productprices.service.InditexProductPricesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 class InditexProductPricesControllerTest {
 
     @Mock
-    private ProductPricesService productPricesService;
+    private InditexProductPricesService productPricesService;
     private InditexProductPricesController productPricesController;
     private Price price;
     private ProductPricesResponseDTO productPricesResponseDTOExpectedOk;
@@ -45,7 +45,7 @@ class InditexProductPricesControllerTest {
 
     @Test
     void getCurrentPriceOkTest() throws NotFoundException {
-        when(productPricesService.getCurrentPrice(any(Long.class), any(Long.class), any(OffsetDateTime.class))).thenReturn(price);
+        when(productPricesService.getSearchPrice(any(Long.class), any(Long.class), any(OffsetDateTime.class))).thenReturn(price);
         ResponseEntity<ProductPricesResponseDTO> response = productPricesController.getCurrentPrice(now, TestUtils.PRODUCT_ID, TestUtils.BRAND_ID);
         assertNotNull(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -56,7 +56,7 @@ class InditexProductPricesControllerTest {
 
     @Test
     void getCurrentPriceKoTest() throws NotFoundException {
-        when(productPricesService.getCurrentPrice(any(Long.class), any(Long.class), any(OffsetDateTime.class))).thenThrow(new NotFoundException(HttpStatus.NOT_FOUND, "Error"));
+        when(productPricesService.getSearchPrice(any(Long.class), any(Long.class), any(OffsetDateTime.class))).thenThrow(new NotFoundException(HttpStatus.NOT_FOUND, "Error"));
         ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> productPricesController.getCurrentPrice(now, TestUtils.PRODUCT_ID, TestUtils.BRAND_ID));
         assertEquals("404 NOT_FOUND \"Error\"", exception.getMessage());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());

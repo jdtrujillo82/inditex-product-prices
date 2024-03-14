@@ -17,5 +17,5 @@ public interface PriceRepository extends PagingAndSortingRepository<Price, Price
             "AND p.priceId.startDate <= :applicationDate " +
             "AND p.priceId.endDate >= :applicationDate " +
             "ORDER BY p.priceId.priority DESC")
-    Page<Price> getCurrentPrice(Long brandId, Long productId, OffsetDateTime applicationDate, Pageable pageable);
+    Page<Price> getSearchPrice(Long brandId, Long productId, OffsetDateTime applicationDate, Pageable pageable);
 }

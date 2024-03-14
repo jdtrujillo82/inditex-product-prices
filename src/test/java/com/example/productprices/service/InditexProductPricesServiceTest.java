@@ -21,34 +21,34 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ProductPricesServiceTest {
+class InditexProductPricesServiceTest {
     @Mock
     private PriceRepository priceRepository;
-    private ProductPricesService productPricesService;
+    private InditexProductPricesService productPricesService;
     private Page<Price> pagedPrices;
     private Page<Price> emptyPagedPrices;
 
     @BeforeEach
     void init() {
-        productPricesService = new ProductPricesService(priceRepository);
+        productPricesService = new InditexProductPricesService(priceRepository);
         List<Price> prices = Collections.singletonList(new Price());
         pagedPrices = new PageImpl<>(prices);
         emptyPagedPrices = new PageImpl<>(Collections.emptyList());
     }
 
     @Test
-    void getCurrentPriceOkTest() throws NotFoundException {
-        when(priceRepository.getCurrentPrice(any(Long.class), any(Long.class), any(OffsetDateTime.class), any(PageRequest.class)))
+    void getSearchPriceOkTest() throws NotFoundException {
+        when(priceRepository.getSearchPrice(any(Long.class), any(Long.class), any(OffsetDateTime.class), any(PageRequest.class)))
                 .thenReturn(pagedPrices);
-        Price result = productPricesService.getCurrentPrice(1L, 1L, OffsetDateTime.now());
+        Price result = productPricesService.getSearchPrice(1L, 1L, OffsetDateTime.now());
         assertNotNull(result);
     }
 
     @Test
-    void getCurrentPriceKoTest() {
-        when(priceRepository.getCurrentPrice(any(Long.class), any(Long.class), any(OffsetDateTime.class), any(PageRequest.class)))
+    void getSearchPriceKOTest() {
+        when(priceRepository.getSearchPrice(any(Long.class), any(Long.class), any(OffsetDateTime.class), any(PageRequest.class)))
                 .thenReturn(emptyPagedPrices);
-        NotFoundException exception = assertThrows(NotFoundException.class, () -> productPricesService.getCurrentPrice(1L, 1L, OffsetDateTime.now()));
+        NotFoundException exception = assertThrows(NotFoundException.class, () -> productPricesService.getSearchPrice(1L, 1L, OffsetDateTime.now()));
         String expectedMessage = "Unable to locate current price for brandId 1 productId 1 and applicationDate ";
         assertTrue(exception.getMessage().contains(expectedMessage));
     }

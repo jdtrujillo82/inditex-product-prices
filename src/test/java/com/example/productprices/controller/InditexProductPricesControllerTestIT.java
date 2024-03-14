@@ -4,7 +4,7 @@ import com.example.productprices.TestUtils;
 import com.example.productprices.dto.ProductPricesResponseDTO;
 import com.example.productprices.mapper.PriceToProductPriceResponseDTOMapper;
 import com.example.productprices.repository.PriceRepository;
-import com.example.productprices.service.ProductPricesService;
+import com.example.productprices.service.InditexProductPricesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class ProductPricesControllerTestIT {
+class InditexProductPricesControllerTestIT {
 
 
     @Autowired
@@ -30,7 +30,7 @@ class ProductPricesControllerTestIT {
 
     @BeforeEach
     void init() {
-        ProductPricesService productPricesService = new ProductPricesService(priceRepository);
+        InditexProductPricesService productPricesService = new InditexProductPricesService(priceRepository);
         PriceToProductPriceResponseDTOMapper mapper = new PriceToProductPriceResponseDTOMapper();
         productPricesController = new InditexProductPricesController(productPricesService, mapper);
 
@@ -38,7 +38,7 @@ class ProductPricesControllerTestIT {
 
     @ParameterizedTest
     @MethodSource("provideParamsForCurrentPrice")
-    void getCurrentPriceOkTest(OffsetDateTime applicationDateTime, Long productId, Long brandId, ProductPricesResponseDTO expectedResponse)  {
+    void getSearchPriceOkTest(OffsetDateTime applicationDateTime, Long productId, Long brandId, ProductPricesResponseDTO expectedResponse)  {
         ResponseEntity<ProductPricesResponseDTO> response = productPricesController.getCurrentPrice(applicationDateTime, productId, brandId);
         
         assertNotNull(response.getBody());

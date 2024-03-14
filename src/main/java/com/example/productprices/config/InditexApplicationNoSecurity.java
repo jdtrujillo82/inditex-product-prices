@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 
 @Configuration
-public class ApplicationNoSecurity {
+public class InditexApplicationNoSecurity {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {

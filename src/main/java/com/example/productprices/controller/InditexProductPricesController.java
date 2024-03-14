@@ -4,7 +4,7 @@ import com.example.productprices.dto.ProductPricesResponseDTO;
 import com.example.productprices.exception.NotFoundException;
 import com.example.productprices.mapper.PriceToProductPriceResponseDTOMapper;
 import com.example.productprices.model.Price;
-import com.example.productprices.service.ProductPricesService;
+import com.example.productprices.service.InditexProductPricesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +19,10 @@ import java.time.OffsetDateTime;
 @RequestMapping("/inditex")
 public class InditexProductPricesController {
 
-    private final ProductPricesService productPricesService;
+    private final InditexProductPricesService productPricesService;
     private final PriceToProductPriceResponseDTOMapper mapper;
 
-    public InditexProductPricesController(ProductPricesService productPricesService, PriceToProductPriceResponseDTOMapper mapper) {
+    public InditexProductPricesController(InditexProductPricesService productPricesService, PriceToProductPriceResponseDTOMapper mapper) {
         this.productPricesService = productPricesService;
         this.mapper = mapper;
     }
@@ -35,7 +35,7 @@ public class InditexProductPricesController {
         try {
 
         	
-            Price price = productPricesService.getCurrentPrice(productId, brandId, aplicationDateTime);
+            Price price = productPricesService.getSearchPrice(productId, brandId, aplicationDateTime);
             ProductPricesResponseDTO productPricesResponseDTO = mapper.mapPriceToProductPriceResponseDTO(price);
 
             return new ResponseEntity<>(productPricesResponseDTO, HttpStatus.OK);

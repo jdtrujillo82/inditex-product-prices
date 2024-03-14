@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories
-public class ProductPricesApplication {
+public class InditexProductPricesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProductPricesApplication.class, args);
+		SpringApplication.run(InditexProductPricesApplication.class, args);
 	}
 
 }

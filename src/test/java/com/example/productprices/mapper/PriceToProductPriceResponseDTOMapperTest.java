@@ -24,7 +24,7 @@ class PriceToProductPriceResponseDTOMapperTest {
     }
 
     @Test
-    void mapPrice2ProductPriceResponseDTOOkTest() {
+    void mapPriceToProductPriceResponseDTOOkTest() {
         ProductPricesResponseDTO response = mapper.mapPriceToProductPriceResponseDTO(price);
 
         assertAll("response",
