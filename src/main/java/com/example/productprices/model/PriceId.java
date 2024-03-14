@@ -3,7 +3,6 @@ package com.example.productprices.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
@@ -12,7 +11,7 @@ import java.time.OffsetDateTime;
 @Builder
 @Embeddable
 public class PriceId implements Serializable {
-    @Serial
+    
     private static final long serialVersionUID = 1L;
     @ManyToOne
     @JoinColumn(name = "BRAND_ID")

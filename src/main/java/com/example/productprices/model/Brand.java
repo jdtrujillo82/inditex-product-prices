@@ -6,8 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
-
-import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
@@ -16,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class Brand implements Serializable {
-    @Serial
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name= "ID")
